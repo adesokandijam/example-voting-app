@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+  labels:
+    app: db
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+        app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+        - name: {{ .Values.db.name }}
+          image: "{{ .Values.db.repository }}:{{ .Values.db.tag | default .Chart.AppVersion }}"
+          ports:
+            - name: http
+              containerPort: 5432
+              protocol: TCP
+          env:
+          - name: POSTGRES_USER
+            value: postgres
+          - name: POSTGRES_PASSWORD
+            value: postgres
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

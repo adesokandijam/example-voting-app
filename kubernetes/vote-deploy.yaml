@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: vote-deploy
+  name: vote-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vote-deploy
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: vote-deploy
+    spec:
+      containers:
+      - image: dijamonthabeatz/vote:main
+        name: vote
+        resources: {}
+status: {}
