@@ -4,8 +4,8 @@ on:
   push:
     branches: ['main']
     paths:
-      - "./worker-docker.yaml"
-      - "../../worker/*"
+      - "./.github/workflows/worker-docker.yaml"
+      - "./worker/*"
 
 jobs:
   push_to_registry:
