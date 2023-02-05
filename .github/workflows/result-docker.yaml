@@ -1,12 +1,15 @@
-name: Publish Docker image
+name: Publish Result image 
 
 on:
   push:
     branches: ['main']
+    paths:
+      - "./result-docker.yaml"
+      - "../../result/*"
 
 jobs:
   push_to_registry:
-    name: Push Docker image to Docker Hub
+    name: Push Result image to Docker Hub
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
@@ -24,7 +27,7 @@ jobs:
         with:
           images: ${{ secrets.DOCKER_USERNAME }}/result
       
-      - name: Build and push Docker image
+      - name: Build and push Result image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: ./result
